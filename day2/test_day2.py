@@ -34,12 +34,12 @@ def divide_evenly_divisible(num_list):
     return next(divide(a, b) for a, b in combinations(num_list, 2) if are_divisible(a, b))
 
 
-def are_divisible(n, num):
-    return max(n, num) % min(n, num) == 0
+def are_divisible(a, b):
+    return max(a, b) % min(a, b) == 0
 
 
-def divide(n, num):
-    return int(max(n, num) / min(n, num))
+def divide(a, b):
+    return int(max(a, b) / min(a, b))
 
 
 class TestDay2Part2(TestCase):
