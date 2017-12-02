@@ -20,11 +20,11 @@ def captcha2(num_string):
 
 
 def digits_matching_digit_halfway_around(num_list):
-    return (number for i, number in enumerate(num_list) if match_halfway_around(num_list, i))
+    return (number for i, number in enumerate(num_list) if number == number_halfway_around(num_list, i))
 
 
-def match_halfway_around(num_list, i):
-    return num_list[i] == num_list[halfway_index(num_list, i)]
+def number_halfway_around(num_list, i):
+    return num_list[halfway_index(num_list, i)]
 
 
 def halfway_index(num_list, i):
