@@ -24,10 +24,10 @@ def digits_matching_digit_halfway_around(num_list):
 
 
 def match_halfway_around(num_list, i):
-    return num_list[i] == num_list[sliced_index(num_list, i)]
+    return num_list[i] == num_list[halfway_index(num_list, i)]
 
 
-def sliced_index(num_list, i):
+def halfway_index(num_list, i):
     return int((len(num_list)/2 + i) % (len(num_list)))
 
 
