@@ -8,8 +8,7 @@ def captcha1(num_string):
 
 
 def digits_matching_next_digit(num_list):
-    return (num_list[i] for i in range(-1, len(num_list))
-            if num_list[i] == num_list[i-1])
+    return (num_list[i] for i in range(-1, len(num_list)) if num_list[i] == num_list[i-1])
 
 
 def make_num_list(num_string):
