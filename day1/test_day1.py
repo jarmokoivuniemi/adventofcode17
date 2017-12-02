@@ -1,13 +1,15 @@
 from unittest import TestCase
 from nose.tools import assert_equal
 
+
 def captcha1(num_string):
     num_list = make_num_list(num_string)
     return sum(digits_matching_next_digit(num_list))
 
 
 def digits_matching_next_digit(num_list):
-    return (num_list[i] for i in range(-1, len(num_list) - 1) if num_list[i] == num_list[i+1])
+    return (num_list[i] for i in range(-1, len(num_list) - 1)
+            if num_list[i] == num_list[i+1])
 
 
 def make_num_list(num_string):
@@ -16,7 +18,8 @@ def make_num_list(num_string):
 
 def captcha2(num_string):
     num_list = make_num_list(num_string)
-    return sum(num_list[i] for i in range(len(num_list)) if num_list[i] == num_list[sliced_index(num_list, i)])
+    return sum(num_list[i] for i in range(len(num_list))
+               if num_list[i] == num_list[sliced_index(num_list, i)])
 
 
 def sliced_index(num_list, i):
@@ -49,4 +52,3 @@ class TestDay1(TestCase):
     def test_part2_works(self):
         with open('puzzle.txt') as f:
             assert_equal(1238, captcha2(str(f.read()).strip()))
-

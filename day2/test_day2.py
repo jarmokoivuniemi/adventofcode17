@@ -2,6 +2,7 @@ from unittest import TestCase
 from nose.tools import assert_equal
 from itertools import combinations
 
+
 def difference_checksum(spreadsheet):
     return sum(difference(make_num_list(numbers)) for numbers in spreadsheet)
 
@@ -42,7 +43,7 @@ def divide(n, num):
 
 
 class TestDay2Part2(TestCase):
-    
+
     def test_even_division(self):
         assert_equal(4, divide_evenly_divisible(make_num_list('5 9 2 8')))
         assert_equal(3, divide_evenly_divisible(make_num_list('9 4 7 3')))
@@ -52,5 +53,3 @@ class TestDay2Part2(TestCase):
         with open('puzzle.txt') as f:
             puzzle = [n.strip() for n in f.readlines() if n.strip()]
             assert_equal(282, division_checksum(puzzle))
-
-
