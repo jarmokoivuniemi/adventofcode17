@@ -3,8 +3,7 @@ from nose.tools import assert_equal
 
 
 def captcha1(num_string):
-    num_list = make_num_list(num_string)
-    return sum(digits_matching_next_digit(num_list))
+    return sum(digits_matching_next_digit(num_list(num_string)))
 
 
 def digits_matching_next_digit(num_list):
@@ -12,14 +11,16 @@ def digits_matching_next_digit(num_list):
             if num_list[i] == num_list[i+1])
 
 
-def make_num_list(num_string):
+def num_list(num_string):
     return [int(num) for num in num_string]
 
 
 def captcha2(num_string):
-    num_list = make_num_list(num_string)
-    return sum(num_list[i] for i in range(len(num_list))
-               if num_list[i] == num_list[sliced_index(num_list, i)])
+    return sum(digits_matching_digit_halfway_around(num_list(num_string)))
+
+
+def digits_matching_digit_halfway_around(num_list):
+    return (num_list[i] for i in range(len(num_list)) if num_list[i] == num_list[sliced_index(num_list, i)])
 
 
 def sliced_index(num_list, i):
