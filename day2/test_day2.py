@@ -32,8 +32,10 @@ def division_checksum(spreadsheet):
 def divide_evenly_divisible(num_list):
     return next(divide(a, b) for a, b in combinations(num_list, 2) if are_divisible(a, b))
 
+
 def are_divisible(n, num):
     return max(n, num) % min(n, num) == 0
+
 
 def divide(n, num):
     return int(max(n, num) / min(n, num))
