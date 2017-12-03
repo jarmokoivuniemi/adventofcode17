@@ -13,35 +13,35 @@ class SpiralMemory:
 
     def spiral_memory(self):
         self.memory = self._init_memory_slots()
-        for roundnum in range(self.square_one, -1, -1):
-            self._spiral_left(roundnum)
-            self._spiral_up(roundnum)
-            self._spiral_right(roundnum)
-            self._spiral_down(roundnum)
+        for spiral_round in range(self.square_one, -1, -1):
+            self._spiral_left(spiral_round)
+            self._spiral_up(spiral_round)
+            self._spiral_right(spiral_round)
+            self._spiral_down(spiral_round)
 
-    def _spiral_left(self, roundnum):
-        i = self.square_one + roundnum
+    def _spiral_left(self, spiral_round):
+        i = self.square_one + spiral_round
         for j in range(self.row_length-1, -1, -1):
             if not self.memory[i][j]:
                 self.memory[i][j] = self._free_memory_slots
                 self._free_memory_slots -= 1
 
-    def _spiral_up(self, roundnum):
-        j = self.square_one - roundnum
+    def _spiral_up(self, spiral_round):
+        j = self.square_one - spiral_round
         for i in range(self.row_length-1, -1, -1):
             if not self.memory[i][j]:
                 self.memory[i][j] = self._free_memory_slots
                 self._free_memory_slots -= 1
 
-    def _spiral_right(self, roundnum):
-        i = self.square_one - roundnum - self.row_length
+    def _spiral_right(self, spiral_round):
+        i = self.square_one - spiral_round - self.row_length
         for j in range(self.row_length):
             if not self.memory[i][j]:
                 self.memory[i][j] = self._free_memory_slots
                 self._free_memory_slots -= 1 
 
-    def _spiral_down(self, roundnum):
-        j = self.square_one + roundnum
+    def _spiral_down(self, spiral_round):
+        j = self.square_one + spiral_round
         for i in range(self.row_length-1):
             if not self.memory[i][j]:
                 self.memory[i][j] = self._free_memory_slots
