@@ -4,6 +4,7 @@ class SpiralMemory:
         self._free_memory_slots = max_slot
         self.row_length = int(pow(self.max_slot, 0.5))
         self.square_one = int((self.row_length-1)/2)
+        self.memory = self._init_memory_slots()
         self.spiral_memory()
 
     def calcualte_distance(self, data):
@@ -12,7 +13,6 @@ class SpiralMemory:
         return abs(abs((x_goal - x)) + abs((y_goal - y)))
 
     def spiral_memory(self):
-        self.memory = self._init_memory_slots()
         for spiral_round in range(self.square_one, -1, -1):
             self._spiral_left(spiral_round)
             self._spiral_up(spiral_round)
@@ -22,33 +22,30 @@ class SpiralMemory:
     def _spiral_left(self, spiral_round):
         i = self.square_one + spiral_round
         for j in range(self.row_length-1, -1, -1):
-            if not self.memory[i][j]:
-                self.memory[i][j] = self._free_memory_slots
-                self._free_memory_slots -= 1
+            self._fill_memory_slot(i, j)
 
     def _spiral_up(self, spiral_round):
         j = self.square_one - spiral_round
         for i in range(self.row_length-1, -1, -1):
-            if not self.memory[i][j]:
-                self.memory[i][j] = self._free_memory_slots
-                self._free_memory_slots -= 1
+            self._fill_memory_slot(i, j)
 
     def _spiral_right(self, spiral_round):
         i = self.square_one - spiral_round - self.row_length
         for j in range(self.row_length):
-            if not self.memory[i][j]:
-                self.memory[i][j] = self._free_memory_slots
-                self._free_memory_slots -= 1 
+            self._fill_memory_slot(i, j)
 
     def _spiral_down(self, spiral_round):
         j = self.square_one + spiral_round
         for i in range(self.row_length-1):
-            if not self.memory[i][j]:
-                self.memory[i][j] = self._free_memory_slots
-                self._free_memory_slots -= 1
+            self._fill_memory_slot(i, j)
 
     def _init_memory_slots(self):
         return [[None for _ in range(self.row_length)] for _ in range(self.row_length)]
+
+    def _fill_memory_slot(self, i, j):
+        if not self.memory[i][j]:
+            self.memory[i][j] = self._free_memory_slots
+            self._free_memory_slots -= 1
 
     def find_location(self, data):
         for i in range(self.row_length):
