@@ -32,7 +32,7 @@ class SpiralMemory:
             self._fill_memory_slot(i, j)
 
     def _spiral_right(self, spiral_round):
-        i = self.square_one - spiral_round - self.row_length
+        i = self.square_one - spiral_round
         for j in self.row_range:
             self._fill_memory_slot(i, j)
 
