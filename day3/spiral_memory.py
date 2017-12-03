@@ -1,3 +1,5 @@
+ACCESS_POINT = 1
+
 class SpiralMemory:
     def __init__(self, max_slot):
         self.max_slot = max_slot
@@ -8,7 +10,7 @@ class SpiralMemory:
         self.fill_memory_slots()
 
     def calcualte_distance(self, data):
-        x_goal, y_goal = self.find_location(1)
+        x_goal, y_goal = self.find_location(ACCESS_POINT)
         x, y = self.find_location(data)
         return abs(abs((x_goal - x)) + abs((y_goal - y)))
 
@@ -31,16 +33,16 @@ class SpiralMemory:
 
     def _spiral_right(self, spiral_round):
         i = self.square_one - spiral_round - self.row_length
-        for j in range(self.row_length):
+        for j in self.row_range:
             self._fill_memory_slot(i, j)
 
     def _spiral_down(self, spiral_round):
         j = self.square_one + spiral_round
-        for i in range(self.row_length-1):
+        for i in self.row_range:
             self._fill_memory_slot(i, j)
 
     def _init_memory_slots(self):
-        return [[None for _ in range(self.row_length)] for _ in range(self.row_length)]
+        return [[None for _ in self.row_range] for _ in self.row_range]
 
     def _fill_memory_slot(self, i, j):
         if not self.memory[i][j]:
@@ -48,9 +50,11 @@ class SpiralMemory:
             self._free_memory_slots -= 1
 
     def find_location(self, data):
-        for i in range(self.row_length):
-            for j in range(self.row_length):
-                if self.memory[i][j] == data:
-                    return (i, j)
+        return next((i, j) for i in self.row_range for j in self.row_range 
+                if self.memory[i][j] == data)
+
+    @property
+    def row_range(self):
+        return range(self.row_length)
 
 
