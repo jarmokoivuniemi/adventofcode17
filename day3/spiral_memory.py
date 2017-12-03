@@ -5,14 +5,14 @@ class SpiralMemory:
         self.row_length = int(pow(self.max_slot, 0.5))
         self.square_one = int((self.row_length-1)/2)
         self.memory = self._init_memory_slots()
-        self.spiral_memory()
+        self.fill_memory_slots()
 
     def calcualte_distance(self, data):
         x_goal, y_goal = self.find_location(1)
         x, y = self.find_location(data)
         return abs(abs((x_goal - x)) + abs((y_goal - y)))
 
-    def spiral_memory(self):
+    def fill_memory_slots(self):
         for spiral_round in range(self.square_one, -1, -1):
             self._spiral_left(spiral_round)
             self._spiral_up(spiral_round)
