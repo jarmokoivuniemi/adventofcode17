@@ -22,24 +22,20 @@ class SpiralMemory:
             self._spiral_down(spiral_round)
 
     def _spiral_left(self, spiral_round):
-        i = self.square_one + spiral_round
         for j in range(self.row_length-1, -1, -1):
-            self._fill_memory_slot(i, j)
+            self._fill_memory_slot(self.square_one + spiral_round, j)
 
     def _spiral_up(self, spiral_round):
-        j = self.square_one - spiral_round
         for i in range(self.row_length-1, -1, -1):
-            self._fill_memory_slot(i, j)
+            self._fill_memory_slot(i, self.square_one - spiral_round)
 
     def _spiral_right(self, spiral_round):
-        i = self.square_one - spiral_round
         for j in self.row_range:
-            self._fill_memory_slot(i, j)
+            self._fill_memory_slot(self.square_one - spiral_round, j)
 
     def _spiral_down(self, spiral_round):
-        j = self.square_one + spiral_round
         for i in self.row_range:
-            self._fill_memory_slot(i, j)
+            self._fill_memory_slot(i, self.square_one + spiral_round)
 
     def _init_memory_slots(self):
         return [[None for _ in self.row_range] for _ in self.row_range]
