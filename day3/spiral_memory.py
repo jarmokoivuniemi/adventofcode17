@@ -16,8 +16,8 @@ class SpiralMemory:
 
     def fill_memory_slots(self):
         x, y = self.square_one, self.square_one
-#right
         self.memory[x][y] = 1
+#right
         self.memory[x][y+1] = 2
 #up
         self.memory[x-1][y+1] = 3
@@ -46,6 +46,11 @@ class SpiralMemory:
             self.memory[x-3][y-3] = 17
 #down
             self.memory[x-2][y-3] = 18
+            self.memory[x-1][y-3] = 19
+            self.memory[x][y-3] = 20
+            self.memory[x+1][y-3] = 21
+#right
+            self.memory[x+1][y-2] = 22
             
 
 
