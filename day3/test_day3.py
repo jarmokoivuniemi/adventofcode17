@@ -5,7 +5,7 @@ from spiral_memory import SpiralMemory
 class TestDay3(TestCase):
 
     def setUp(self):
-        self.memory = SpiralMemory(9)
+        self.memory = SpiralMemory(25)
 
     def test_size_49(self):
         memory = SpiralMemory(49)
@@ -41,7 +41,7 @@ class TestDay3(TestCase):
                 [20,  7,  8,  9, 10],
                 [21, 22, 23, 24, 25]
                 ]
-        #assert_equal(expected, memory.memory)
+        assert_equal(expected, memory.memory)
         assert_equal(1, memory.memory[2][2])
         assert_equal(2, memory.memory[2][3])
         assert_equal(3, memory.memory[1][3])
@@ -64,9 +64,9 @@ class TestDay3(TestCase):
         assert_equal(20, memory.memory[3][0])
         assert_equal(21, memory.memory[4][0])
         assert_equal(22, memory.memory[4][1])
-        #assert_equal(23, memory.memory[4][2])
-        #assert_equal(24, memory.memory[4][3])
-        #assert_equal(25, memory.memory[4][4])
+        assert_equal(23, memory.memory[4][2])
+        assert_equal(24, memory.memory[4][3])
+        assert_equal(25, memory.memory[4][4])
 
 
     def test_size_nine(self):
@@ -86,20 +86,20 @@ class TestDay3(TestCase):
         assert_equal(8, memory.memory[2][1])
         assert_equal(9, memory.memory[2][2])
 
-    def est_find_data_square(self):
+    def test_find_data_square(self):
         assert_equal((2, 2), self.memory.find_location(1))
         assert_equal((2, 3), self.memory.find_location(2))
 
-    def est_calculate_distance(self):
+    def test_calculate_distance(self):
         assert_equal(0, self.memory.calcualte_distance(1))
         assert_equal(3, self.memory.calcualte_distance(12))
         assert_equal(2, self.memory.calcualte_distance(23))
 
-    def est_big_spiral(self):
+    def test_big_spiral(self):
         memory = SpiralMemory(pow(199, 2))
         assert_equal(31, memory.calcualte_distance(1024))
 
-    def est_part1_works(self):
+    def test_part1_works(self):
         memory = SpiralMemory(pow(587, 2))
         assert_equal(430, memory.calcualte_distance(312051))
 
