@@ -3,7 +3,7 @@ ACCESS_POINT = 1
 class SpiralMemory:
     def __init__(self, max_slot):
         self.max_slot = max_slot
-        self._free_memory_slots = max_slot
+        self._free_memory_slots = 1
         self.row_length = int(pow(self.max_slot, 0.5))
         self.square_one = int((self.row_length-1)/2)
         self.memory = self._init_memory_slots()
@@ -15,35 +15,47 @@ class SpiralMemory:
         return abs(abs((x_goal - x)) + abs((y_goal - y)))
 
     def fill_memory_slots(self):
-        for spiral_round in range(self.square_one, -1, -1):
-            self._spiral_left(spiral_round)
-            self._spiral_up(spiral_round)
-            self._spiral_right(spiral_round)
-            self._spiral_down(spiral_round)
+        x, y = self.square_one, self.square_one
+#right
+        self.memory[x][y] = 1
+        self.memory[x][y+1] = 2
+#up
+        self.memory[x-1][y+1] = 3
+#left
+        self.memory[x-1][y] = 4
+        self.memory[x-1][y-1] = 5
+#down
+        self.memory[x][y-1] = 6
+        self.memory[x+1][y-1] = 7
+#right
+        x += 1
+        self.memory[x][y] = 8
+        self.memory[x][y+1] = 9
 
-    def _spiral_left(self, spiral_round):
-        for j in range(self.row_length-1, -1, -1):
-            self._fill_memory_slot(self.square_one + spiral_round, j)
+        if self.row_length > self.square_one+2:
+            y += 1
+            self.memory[x][y+1] = 10
+#up
+            self.memory[x-1][y+1] = 11
+            self.memory[x-2][y+1] = 12
+            self.memory[x-3][y+1] = 13
+#left
+            self.memory[x-3][y] = 14
+            self.memory[x-3][y-1] = 15
+            self.memory[x-3][y-2] = 16
+            self.memory[x-3][y-3] = 17
+#down
+            self.memory[x-2][y-3] = 18
+            
 
-    def _spiral_up(self, spiral_round):
-        for i in range(self.row_length-1, -1, -1):
-            self._fill_memory_slot(i, self.square_one - spiral_round)
-
-    def _spiral_right(self, spiral_round):
-        for j in self.row_range:
-            self._fill_memory_slot(self.square_one - spiral_round, j)
-
-    def _spiral_down(self, spiral_round):
-        for i in self.row_range:
-            self._fill_memory_slot(i, self.square_one + spiral_round)
-
-    def _init_memory_slots(self):
-        return [[None for _ in self.row_range] for _ in self.row_range]
 
     def _fill_memory_slot(self, i, j):
         if not self.memory[i][j]:
             self.memory[i][j] = self._free_memory_slots
-            self._free_memory_slots -= 1
+            self._free_memory_slots += 1
+
+    def _init_memory_slots(self):
+        return [[0 for _ in self.row_range] for _ in self.row_range]
 
     def find_location(self, data):
         return next((i, j) for i in self.row_range for j in self.row_range 
