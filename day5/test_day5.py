@@ -3,22 +3,22 @@ from nose.tools import assert_equal
 
 def steps_to_exit(offsets, next_position):
     current_pos, steps = 0, 0
-    step_map = {i: number for i, number in enumerate(offsets)}
+    offset_map = {i: number for i, number in enumerate(offsets)}
     while current_pos < len(offsets):
-        current_pos += next_position(current_pos, step_map)
+        current_pos += next_position(current_pos, offset_map)
         steps +=1
     return steps
 
 
-def part1(current_pos, step_map):
-    pos = step_map[current_pos]
-    step_map[current_pos] += 1
+def part1(current_pos, offset_map):
+    pos = offset_map[current_pos]
+    offset_map[current_pos] += 1
     return pos
 
 
-def part2(current_pos, step_map):
-    pos = step_map[current_pos]
-    step_map[current_pos] += -1 if pos >=3 else 1
+def part2(current_pos, offset_map):
+    pos = offset_map[current_pos]
+    offset_map[current_pos] += -1 if pos >=3 else 1
     return pos
 
 class TestDay5(TestCase):
