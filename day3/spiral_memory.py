@@ -25,17 +25,13 @@ class SpiralMemory:
         self.memory[x][y] = 1
         slots_to_fill = 1
         slot_value = 2
-        for _ in range(self.row_length-1):
-            for _ in range(slots_to_fill):
-                x, y = self._next_slot(x, y)
-                self.memory[x][y] = self._slot_value(x, y, slot_value)
-                slot_value +=1
-            self.direction = self._turn()
-            for _ in range(slots_to_fill):
-                x, y = self._next_slot(x, y)
-                self.memory[x][y] = self._slot_value(x, y, slot_value)
-                slot_value += 1
-            self.direction = self._turn()
+        while not self.found:
+            for _ in range(2):
+                for _ in range(slots_to_fill):
+                    x, y = self._next_slot(x, y)
+                    self.memory[x][y] = self._slot_value(x, y, slot_value)
+                    slot_value +=1
+                self.direction = self._turn()
             slots_to_fill += 1
 
     def _next_slot(self, x, y):
