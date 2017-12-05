@@ -37,12 +37,6 @@ class SpiralMemory:
                 slot_value += 1
             self.direction = self._turn()
             slots_to_fill += 1
-        for _ in range(slots_to_fill):
-            x, y = self._next_slot(x, y)
-            self.memory[x][y] = self._slot_value(x, y, slot_value)
-            slot_value += 1
-            if slot_value == self.max_slot+1:
-                break
 
     def _next_slot(self, x, y):
         x += DIRECTIONS[self.direction][0]
