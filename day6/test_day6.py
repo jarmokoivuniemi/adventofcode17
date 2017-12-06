@@ -10,7 +10,7 @@ def balanced_memory_banks(memory_banks, limit=2):
 def balance(memory_banks):
     largest_bank = memory_banks.index(max(memory_banks)) 
     for i in range(1, memory_banks[largest_bank]+1):
-        memory_banks[(len(memory_banks) + largest_bank + i) % len(memory_banks)] += 1
+        memory_banks[(largest_bank + i) % len(memory_banks)] += 1
         memory_banks[largest_bank] -= 1
     return memory_banks
 
