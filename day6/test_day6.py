@@ -1,26 +1,20 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 from nose.tools import assert_equal
 
-def detect_infinite_loop(blocks, times=2):
+def detect_infinite_loop(memory_banks, times=2):
     found_configs = []
-    cycles = 0
-    while found_configs.count(blocks) < times:
-        blocks = balance(list(blocks))
-        found_configs.append(blocks)
-        cycles += 1
-
-    return cycles
+    while found_configs.count(memory_banks) < times:
+        found_configs.append(list(balance(memory_banks)))
+    return len(found_configs)
 
 
-def balance(blocks):
-    block_size = len(blocks)
-    largest_bank = blocks.index(max(blocks)) 
-    slots_to_distribute = blocks[largest_bank]
-    blocks[largest_bank] = 0
-    for i in range(1, slots_to_distribute+1):
-        blocks[(block_size + largest_bank + i) % block_size] += 1
+def balance(memory_banks):
+    largest_bank = memory_banks.index(max(memory_banks)) 
+    for i in range(1, memory_banks[largest_bank]+1):
+        memory_banks[(len(memory_banks) + largest_bank + i) % len(memory_banks)] += 1
+        memory_banks[largest_bank] -= 1
 
-    return blocks
+    return memory_banks
 
 class TestDay6(TestCase):
 
@@ -30,15 +24,17 @@ class TestDay6(TestCase):
 
         assert_equal(5, detect_infinite_loop([0, 2, 7, 0]))
 
+    @skip('slow')
     def test_part1_works(self):
         with open('puzzle.txt') as f:
-            blocks = [int(s.strip()) for s in f.read().split()]
-            assert_equal(14029, detect_infinite_loop(blocks))
+            memory_banks = [int(s.strip()) for s in f.read().split()]
+            assert_equal(14029, detect_infinite_loop(memory_banks))
 
     def test_part2_examples(self):
         assert_equal(5+4, detect_infinite_loop([0, 2, 7, 0], times=3))
 
+    @skip('slow')
     def test_part2_works(self):
         with open('puzzle.txt') as f:
-            blocks = [int(s.strip()) for s in f.read().split()]
-            assert_equal(14029 + 2765, detect_infinite_loop(blocks, times=3))
+            memory_banks = [int(s.strip()) for s in f.read().split()]
+            assert_equal(14029 + 2765, detect_infinite_loop(memory_banks, times=3))
