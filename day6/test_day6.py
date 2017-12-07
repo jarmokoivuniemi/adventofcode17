@@ -1,14 +1,16 @@
 from unittest import TestCase, skip
 from nose.tools import assert_equal
 
+
 def balanced_memory_banks(memory_banks):
     found_configs = []
     while found_configs.count(memory_banks) < 2:
         found_configs.append(list(balance(memory_banks)))
     return found_configs
 
+
 def balance(memory_banks):
-    largest_bank = memory_banks.index(max(memory_banks)) 
+    largest_bank = memory_banks.index(max(memory_banks))
     for i in range(1, memory_banks[largest_bank]+1):
         memory_banks[(largest_bank + i) % len(memory_banks)] += 1
         memory_banks[largest_bank] -= 1
@@ -16,7 +18,7 @@ def balance(memory_banks):
 
 
 def cycles_between_duplicates(found):
-    return len(found)-1 - found.index(found[len(found)-1])
+    return len(found) - 1 - found.index(found[len(found) - 1])
 
 
 class TestDay6(TestCase):

@@ -12,4 +12,3 @@ class TestDay3(TestCase):
     def test_part2_works(self):
         memory = SpiralMemory(pow(1000, 2), hack=True, puzzle=312051)
         assert_equal(312453, memory.puzzle)
-        

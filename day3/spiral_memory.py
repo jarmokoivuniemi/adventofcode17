@@ -1,14 +1,15 @@
-#Don't look at me
+# Don't look at me
 ACCESS_POINT = 1
 UP, RIGHT, DOWN, LEFT = 0, 90, 180, 270
 DIRECTIONS = {UP: (-1, 0), RIGHT: (0, 1), DOWN: (1, 0), LEFT: (0, -1)}
 SIDES_BEFORE_TURN = 2
 
+
 class SpiralMemory:
     def __init__(self, max_slot, hack=False, puzzle=0):
         self.puzzle = puzzle
         self.found = False
-        self.part2_hack = hack #sigh
+        self.part2_hack = hack  # sigh
         self.direction = RIGHT
         self.max_slot = max_slot
         self.row_length = int(pow(self.max_slot, 0.5))
@@ -31,7 +32,7 @@ class SpiralMemory:
                 for _ in range(slots_to_fill):
                     x, y = self._next_slot(x, y)
                     self.memory[x][y] = self._slot_value(x, y, slot_value)
-                    slot_value +=1
+                    slot_value += 1
                 self._turn()
             slots_to_fill += 1
 
@@ -48,14 +49,14 @@ class SpiralMemory:
 
     def find_location(self, data):
         return next((x, y) for x in self._row_range for y in self._row_range
-                if self.memory[x][y] == data)
+                    if self.memory[x][y] == data)
 
     @property
     def _row_range(self):
         return range(self.row_length)
 
     def _slot_value(self, x, y, slot_value):
-        result = slot_value if not self.part2_hack else sum(self._surrounding_elems(x, y)) 
+        result = slot_value if not self.part2_hack else sum(self._surrounding_elems(x, y))
         if result > self.puzzle and not self.found:
             self.puzzle = result
             self.found = True
