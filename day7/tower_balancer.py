@@ -3,13 +3,13 @@ class TowerBalancer:
         self.towers = towers
 
     def bottom_tower(self):
-        return next(tower for key, tower in self.towers.items() if self._is_bottom_tower(tower))
+        return next(tower for tower in self.towers.values() if self._is_bottom_tower(tower))
 
     def _is_bottom_tower(self, tower):
         return not any(self._is_child_of_other_towers(tower))
 
     def _is_child_of_other_towers(self, tower):
-        return (tower['name'] in t.get('children', []) for key, t in self.towers.items())
+        return (tower['name'] in t.get('children', []) for t in self.towers.values())
 
     def weight_for_unbalanceed(self, father, result=[]):
         self._sum_weights_for_father_nodes(father)
@@ -39,4 +39,4 @@ class TowerBalancer:
             if sums.count(tower['sum']) < 2:
                 sums.remove(tower['sum'])
                 return tower, sums[0]
-        return None, None
+        return {}, 0

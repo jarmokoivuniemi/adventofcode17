@@ -68,7 +68,6 @@ class TestDay7(TestCase):
         assert_equal(60, balancer.weight_for_unbalanceed(bottom))
 
     def test_part2_works(self):
-        with open('puzzle.txt') as f:
-            balancer = TowerBalancer(self.puzzle_towers())
-            bottom = balancer.bottom_tower()
-            assert_equal(646, balancer.weight_for_unbalanceed(bottom))
+        balancer = TowerBalancer(self.puzzle_towers())
+        bottom = balancer.bottom_tower()
+        assert_equal(646, balancer.weight_for_unbalanceed(bottom))
