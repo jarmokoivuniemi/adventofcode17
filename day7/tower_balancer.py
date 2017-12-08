@@ -6,9 +6,9 @@ class TowerBalancer:
         return next(tower for tower in self.towers.values() if self._is_bottom_tower(tower))
 
     def _is_bottom_tower(self, tower):
-        return not any(self._is_child_of_other_towers(tower))
+        return not any(self._has_father_tower(tower))
 
-    def _is_child_of_other_towers(self, tower):
+    def _has_father_tower(self, tower):
         return (tower['name'] in t.get('children', []) for t in self.towers.values())
 
     def weight_for_unbalanceed(self, father, result=[]):
