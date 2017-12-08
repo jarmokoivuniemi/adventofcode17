@@ -12,7 +12,7 @@ class TowerBalancer:
         return (tower['name'] in t.get('children', []) for t in self.towers.values())
 
     def weight_for_unbalanceed(self, father, result=[]):
-        self._sum_weights_for_father_nodes(father)
+        self._sum_weights_for_children(father)
 
         unbalanced, correct_value = self._find_unbalanced([self.towers[s] for s in father['children']])
         if unbalanced:
@@ -22,7 +22,7 @@ class TowerBalancer:
             unbalanced, correct_value = result[-1]
             return unbalanced['weight'] - (unbalanced['sum'] - correct_value)
 
-    def _sum_weights_for_father_nodes(self, father):
+    def _sum_weights_for_children(self, father):
         for children in father['children']:
             tower = self.towers[children]
             tower['sum'] = self._child_weights(tower)
