@@ -8,6 +8,7 @@ comparations = {
         '==': lambda x, y: x == y,
         '!=': lambda x, y: x != y
         }
+
 operations = {
         'inc': 1,
         'dec': -1,
@@ -16,12 +17,14 @@ operations = {
 def init_values(instructions):
     return {s.split()[0]: 0 for s in instructions}
 
-def execute_instructions(instructions, values):
+def execute_instructions(instructions):
+    values = init_values(instructions)
     max_val = 0
     for instruction in instructions:
-        values[instruction.split()[0]] += calculate(instruction, values)
-        if values[instruction.split()[0]] > max_val:
-            max_val = values[instruction.split()[0]]
+        value = instruction.split()[0]
+        values[value] += calculate(instruction, values)
+        if values[value] > max_val:
+            max_val = values[value]
     return values, max_val
 
 def calculate(instruction, values):
@@ -48,8 +51,7 @@ class TestDay8(TestCase):
 
     def test_given_instructions_that_change_value_when_execute_instructions(self):
         instructions = ['b inc 5 if a > 1', 'a inc 1 if b < 5']
-        values = init_values(instructions)
-        assert_equal({'a': 1, 'b': 0}, execute_instructions(instructions, values)[0])
+        assert_equal({'a': 1, 'b': 0}, execute_instructions(instructions)[0])
 
     def test_part1_examples(self):
         instructions = [
@@ -58,15 +60,13 @@ class TestDay8(TestCase):
         'c dec -10 if a >= 1',
         'c inc -20 if c == 10',
         ]
-        values = init_values(instructions)
-        values, max_val = execute_instructions(instructions, values)
+        values, max_val = execute_instructions(instructions)
         assert_equal(1, values[max(values, key=values.get)])
 
     def test_it_works(self):
         with open('puzzle.txt') as f:
             instructions = [s.strip() for s in f.readlines()]
-            values = init_values(instructions)
-            values, max_val = execute_instructions(instructions, values)
+            values, max_val = execute_instructions(instructions)
             assert_equal(4066, values[max(values, key=values.get)])
             assert_equal(4829, max_val)
 
