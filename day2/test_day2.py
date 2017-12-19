@@ -51,5 +51,5 @@ class TestDay2Part2(TestCase):
 
     def test_it_wors(self):
         with open('puzzle.txt') as f:
-            puzzle = [n.strip() for n in f.readlines() if n]
+            puzzle = [n for n in f.readlines() if n]
             assert_equal(282, division_checksum(puzzle))
