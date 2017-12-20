@@ -1,19 +1,19 @@
 
 function captcha1(input) {
-  const arr = intArray(input);
-  const isNextDigitMatch = (x, i) => x === arr[(i+1) % arr.length];
+  const numbers = intArray(input);
+  const isNextDigitMatch = (x, i) => x === numbers[(i+1) % numbers.length];
   const digitsMatchingNextDigit = (sum, x, i) => sum + (isNextDigitMatch(x, i) ? x : 0)
 
-  return  arr.reduce(digitsMatchingNextDigit, 0);
+  return  numbers.reduce(digitsMatchingNextDigit, 0);
 };
 
 function captcha2(input) {
-  const arr = intArray(input);
-  const half = arr.length/2;
-  const matchesHalfwayAround = (x, i) => x === arr[(i+half) % arr.length];
+  const numbers = intArray(input);
+  const half = numbers.length/2;
+  const matchesHalfwayAround = (x, i) => x === numbers[(i+half) % numbers.length];
   const digitsMatchingHalfwayAround = (sum, x, i) => sum + (matchesHalfwayAround(x, i) ? x : 0)
 
-  return  arr.reduce(digitsMatchingHalfwayAround, 0);
+  return  numbers.reduce(digitsMatchingHalfwayAround, 0);
 };
 
 function intArray(input) {
