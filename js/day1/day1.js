@@ -1,19 +1,24 @@
+const sum = (acc, x) => acc + x 
 
 function captcha1(input) {
   const numbers = intArray(input);
   const isNextDigitMatch = (x, i) => x === numbers[(i+1) % numbers.length];
-  const digitsMatchingNextDigit = (sum, x, i) => sum + (isNextDigitMatch(x, i) ? x : 0)
+  const digitsMatchingNextDigit = (x, i) => isNextDigitMatch(x, i) ? x: 0
 
-  return  numbers.reduce(digitsMatchingNextDigit, 0);
+  return numbers
+    .map(digitsMatchingNextDigit)
+    .reduce(sum);
 };
 
 function captcha2(input) {
   const numbers = intArray(input);
   const half = numbers.length/2;
   const matchesHalfwayAround = (x, i) => x === numbers[(i+half) % numbers.length];
-  const digitsMatchingHalfwayAround = (sum, x, i) => sum + (matchesHalfwayAround(x, i) ? x : 0)
+  const digitsMatchingHalfwayAround = (x, i) => matchesHalfwayAround(x, i) ? x : 0;
 
-  return  numbers.reduce(digitsMatchingHalfwayAround, 0);
+  return numbers
+    .map(digitsMatchingHalfwayAround)
+    .reduce(sum);
 };
 
 function intArray(input) {
