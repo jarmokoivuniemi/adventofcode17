@@ -1,0 +1,12 @@
+{
+  "spec_dir": "day*",
+  "spec_files": [
+    "**/*[sS]pec.js",
+    "../../day1/*Spec.js"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": false
+}
