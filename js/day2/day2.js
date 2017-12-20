@@ -10,6 +10,11 @@ function differenceChecksum(input) {
     .reduce(sum)
 };
 
+function difference(input) {
+  let numbers = input.split('\t').map(x => parseInt(x));
+  return numbers.reduce(max) - numbers.reduce(min)
+};
+
 function divisionChecksum(input) {
   return input
     .split("\n")
@@ -28,11 +33,6 @@ function hasDivisible(x, numbers) {
     .filter(n => x !== n)
     .filter(n => max(x, n) % min(x, n) == 0)
     .length != 0;
-};
-
-function difference(input) {
-  let numbers = input.split('\t').map(x => parseInt(x));
-  return numbers.reduce(max) - numbers.reduce(min)
 };
 
 module.exports.difference = difference
