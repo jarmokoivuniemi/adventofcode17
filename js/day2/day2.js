@@ -23,9 +23,11 @@ function divisionChecksum(input) {
 };
 
 function divideEvenlyDivisible(input) {
-  let numbers = input.split('\t').map(x => parseInt(x));
-  let divisibles = numbers.filter(x => hasDivisible(x, numbers));
-  return divisibles.reduce(max) / divisibles.reduce(min)
+  return input
+    .split('\t')
+    .map(x => parseInt(x))
+    .filter((x, _, numbers) => hasDivisible(x, numbers))
+    .reduce((x, y) => max(x, y) / min(x, y))
 };
 
 function hasDivisible(x, numbers) {
